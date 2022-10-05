@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-size: 21px;
+    /*background: #ffd359;/* fallback for old browsers */
+    /*background: -webkit-linear-gradient(to left, #ffa751, #ffd359);/* Chrome 10-25, Safari 5.1-6 */
+    /*background: linear-gradient(to left, #ffa851, #ffd359);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    margin: 0;
+    font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+label{
+  font-size: 17px;
+}
+
+h1{
+  color: #000;
+}
+
+.btn-m {
+  align-items: center;
+  appearance: none;
+  background-color: #ccc;
+  border-radius: 22px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #3c4043;
+  cursor: pointer;
+  display: inline-flex;
+  fill: currentcolor;
+  font-family: 'Raleway',"Google Sans",Roboto,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 45px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  will-change: transform,opacity;
+  z-index: 0;
+}
+
+.black{
+  color: #000;
+}
+
+.btn-m:hover {
+  background: #fff;
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 1px;
+  color: #174ea6;
+}
+
+.btn-m:active {
+  outline: none;
+}
+
+.btn-m:focus {
+  outline: none;
+  border: 2px solid #4285f4;
+}
+
+.error-txt{
+  color: red;
+  font-size: 11px;
+  padding-left: 15px;
+  height: 11px;
+}
+
+.success-txt{
+  color: green;
+  font-size: 11px;
+  padding-left: 15px;
+  height: 11px;
+}
+
+.hide{
+  display: none;
+}
+
+/* Phone < 736px */
+@media (max-width: 736px) {
+    body {
+        font-size: 18px;
+    }
+    label{
+      font-size: 15px;
+    }
+}
+

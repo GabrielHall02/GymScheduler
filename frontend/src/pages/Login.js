@@ -59,16 +59,15 @@ function Login () {
             <div className="top"></div>
             <div className="bottom"></div>
             <div className="center">
-                <h2>Please Sign In</h2>
+                <h2>Iniciar Sessão</h2>
                 <form onSubmit={login}>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" />
                     <p className={loginStatus === "Success" ? "success-txt" : "error-txt"}>{loginStatus}</p>
                     <input type="submit" className="btn-m" value="Login" />
                 </form>
                 
-                <h2>&nbsp;</h2>
-                <Link to="/Register"> Register </Link>
+                <Link className="btn-m" style={{width:"100%", margin:"5px", backgroundImage: "linear-gradient(to right, #aaa 0%, #aaa 51%, #F8B716 100%)", textDecoration:"None"}} to="/Register"> Register </Link>
             </div>
         </div>
         </>

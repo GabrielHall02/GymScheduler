@@ -100,7 +100,7 @@
 
 .menu-btn {
 
-  background-image: linear-gradient(to right, #3745b5 0%,#60b8d4   51%, #ecaf81   100%);
+  background-image: linear-gradient(to right, #F8B716 0%,#F8B716   51%, #231F20   100%);
   margin: 10px;
   transition: 0.5s;
   background-size: 200% auto;
@@ -140,11 +140,10 @@
 
 
 .menu-btn-mid{
-  background-image: linear-gradient(to right, #3745b5 0%,#44899e   51%, #ecaf81   100%);
+  background-image: linear-gradient(to right, #F8B716 0%,#F8B716   51%, #231F20   100%);
     margin: 10px;
     transition: 0.5s;
     background-size: 200% auto;
-    box-shadow: 0 0 20px #60b9d48f;
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -38,21 +38,20 @@ function Login () {
     
     return (
         <>
-        <div class="container">
-            <div class="top"></div>
-            <div class="bottom"></div>
-            <div class="center">
-                <h2>Please Register</h2>
+        <div className="container">
+            <div className="top"></div>
+            <div className="bottom"></div>
+            <div className="center" style={{top:"10%",marginTop:"0px"}}>
+                <h2>Registar Conta</h2>
                 <form onSubmit={registerUser}>
                     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
 
-                    <input type="submit" class="btn-m" value="Register" />
+                    <input type="submit" className="btn-m" value="Register" />
                 </form>
                 
-                <Link to="/home"> Home </Link>
-                <Link to="/Login"> Login </Link>
+                <Link to="/Login" className="btn-m" style={{width:"100%", margin:"5px", backgroundImage: "linear-gradient(to right, #aaa 0%, #aaa 51%, #F8B716 100%)", textDecoration:"None"}}> Login </Link>
             </div>
         </div>
         </>

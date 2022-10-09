@@ -11,6 +11,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from "./components/navbar/Navbar"
 import Activate from "./pages/ActivateUser";
+import Profile from "./pages/Profile";
+import Schedule from "./pages/Schedule";
 
 
 function App() {
@@ -48,7 +50,9 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
+                    <Route path="/profile" element={<Profile user={user}/>}/>
                     <Route path="/activate/:token" element={<Activate/>}/>
+                    <Route path="/schedule" element={<Schedule/>}/>
                 </Routes>
             </BrowserRouter>
             

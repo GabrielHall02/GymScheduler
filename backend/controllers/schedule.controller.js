@@ -10,8 +10,8 @@ export default class scheduleControler {
             filters.date = req.query.date
         } else if (req.query.duration) {
             filters.duration = req.query.duration
-        } else if (req.query.user) {
-            filters = req.query.user
+        } else if (req.query.username) {
+            filters = req.query.username
         }
 
         const { scheduleList, totalNumSchedule } = await scheduleDAO.getSchedule({
@@ -36,7 +36,6 @@ export default class scheduleControler {
             const duration = req.body.duration
             const userInfo = {
                 username: req.body.username,
-                _id: req.body.user_id,
             }
             const scheduleResponse = await scheduleDAO.addSchedule(
                 date,
@@ -60,7 +59,7 @@ export default class scheduleControler {
                 scheduleId,
                 date,
                 duration,
-                req.body.user_id,
+                req.body.username,
             )
             var { error } = scheduleResponse
             if (error) {
@@ -81,11 +80,11 @@ export default class scheduleControler {
     static async apiDeleteSchedule(req, res, next) {
         try {
             const scheduleId = req.query.id
-            const userId = req.body.user_id
+            const username = req.body.username
             console.log(scheduleId)
             const scheduleResponse = await scheduleDAO.deleteSchedule(
                 scheduleId,
-                userId,
+                username,
             )
             if (scheduleResponse.deletedCount === 0) {
                 throw new Error(

@@ -36,7 +36,9 @@ export default class usersDAO {
                 query = { "email": { $eq: filters["email"] } }
             } else if ("password" in filters) {
                 query = { "password": { $eq: filters["password"] } }
-            } 
+            } else if ("_id" in filters) {
+                query = { "_id": { $eq: ObjectId(filters["_id"]) } }
+            }
         }
 
         let cursor

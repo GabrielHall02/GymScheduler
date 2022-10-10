@@ -15,6 +15,8 @@ export default class usersController {
             filters.email = req.query.email;
         } else if (req.query.password) {
             filters.password = req.query.password;
+        } else if (req.query._id) {
+            filters._id = req.query._id;
         }
 
         const { usersList, totalNumUsers } = await usersDAO.getUsers({

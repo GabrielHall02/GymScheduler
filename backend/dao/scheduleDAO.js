@@ -30,8 +30,8 @@ export default class scheduleDAO {
                 query = { $date: { $search: filters["date"] } }
             } else if ("duration" in filters) {
                 query = { "duration": { $eq: filters["duration"] } }
-            } else if ("user" in filters) {
-                query = { "user": { $eq: filters["user"] } }
+            } else if ("username" in filters) {
+                query = { "username": { $eq: filters["username"] } }
             }
         }
 
@@ -40,6 +40,8 @@ export default class scheduleDAO {
         try {
             cursor = await schedule
                 .find(query)
+            cursor.sort({ date: 1 })
+
         } catch (e) {
             console.error(`Unable to issue find command, ${e}`)
             return { scheduleList: [], totalNumSchedule: 0 }
@@ -66,7 +68,7 @@ export default class scheduleDAO {
             const scheduleDoc = {
                 date: date,
                 duration: duration,
-                user_id: userInfo._id
+                username: userInfo.username
             }
             return await schedule.insertOne(scheduleDoc)
         } catch (e) {
@@ -76,9 +78,9 @@ export default class scheduleDAO {
     }
 
     // Update a schedule
-    static async updateSchedule(scheduleId, date, duration, userId) {
+    static async updateSchedule(scheduleId, date, duration, username) {
         try {
-            const updateResponse = await schedule.updateOne({ _id: ObjectId(scheduleId), user_id: userId }, { $set: { date: date, duration: duration } }, )
+            const updateResponse = await schedule.updateOne({ _id: ObjectId(scheduleId), username: username }, { $set: { date: date, duration: duration } }, )
 
             return updateResponse
         } catch (e) {
@@ -88,11 +90,11 @@ export default class scheduleDAO {
     }
 
     // Delete a schedule
-    static async deleteSchedule(scheduleId, userId) {
+    static async deleteSchedule(scheduleId, username) {
         try {
             const deleteResponse = await schedule.deleteOne({
                 _id: ObjectId(scheduleId),
-                user_id: userId
+                username: username
             })
 
             return deleteResponse

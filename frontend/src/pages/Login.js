@@ -3,6 +3,7 @@ import "./style.css"
 import { Link } from "react-router-dom";
 
 function Login () {
+    useEffect(() => {document.body.style.overflow = "hidden";}, []);
     const [loginStatus, setLoginStatus] = React.useState("");
 
     const [email, setEmail] = React.useState("");
@@ -25,7 +26,7 @@ function Login () {
 
         if (data.email === email) {
             setLoginStatus("Success")
-            window.location.href = "/";
+            window.location.href = "/Schedule";
         }else {
             setLoginStatus("Invalid email or password")
         }
@@ -43,7 +44,7 @@ function Login () {
         .then((data) => {
             try{
                 if (data.loggedIn === true) {
-                    window.location.href = "/";
+                    window.location.href = "/Schedule";
                 }
             }catch{
                 console.log("Error");

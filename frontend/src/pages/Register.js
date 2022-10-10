@@ -1,8 +1,9 @@
-import React from "react"
+import React, {useEffect} from "react"
 import "./style.css"
 import { Link } from "react-router-dom";
 
-function Login () {
+function Register () {
+    useEffect(() => {document.body.style.overflow = "hidden";}, []);
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -58,4 +59,4 @@ function Login () {
     )
     }
 
-export default Login
+export default Register

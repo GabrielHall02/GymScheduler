@@ -114,7 +114,6 @@
   color: #fff;
   width: 105px;
   height: 35px;
-  z-index: 50;
   cursor: pointer;
   right:1%;
 
@@ -154,7 +153,6 @@
     color: #fff;
     width: 105px;
     height: 35px;
-    z-index: 50;
     cursor: pointer;
     position: absolute;
     right:1%;

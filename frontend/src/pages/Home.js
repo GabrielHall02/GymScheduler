@@ -3,10 +3,10 @@ import vector from "../vectors/Dumbbell.svg"
 
 
 function Home () {
+    useEffect(() => {document.body.style.overflow = "hidden";}, []);
 
     async function getStarted (event) {
         event.preventDefault();
-        console.log("get started")
 
         const response = await fetch("http://localhost:5005/api/v1/users/login", {
             method: "GET",

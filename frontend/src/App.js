@@ -16,7 +16,7 @@ import Schedule from "./pages/Schedule";
 
 
 function App() {
-    useEffect(() => {document.body.style.overflow = "hidden";}, []);
+    
 
     const [user, setUser] = React.useState("");
 

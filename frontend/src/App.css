@@ -121,13 +121,21 @@ h1{
   border: none;
 }
 
-/* Phone < 736px */
-@media (max-width: 736px) {
-    body {
-        font-size: 18px;
-    }
-    label{
-      font-size: 15px;
-    }
+/* Phone < 768px */
+@media (max-width: 768px) {
+  body {
+      font-size: 18px;
+  }
+  label{
+    font-size: 15px;
+  }
+
+  .btn-s{
+    height: 49px;
+    width: 130px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 25px;
+  }
 }
 

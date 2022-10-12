@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from "react"
 import "./style.css"
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 function Menu() {
@@ -8,7 +8,7 @@ function Menu() {
     const [isActive, setIsActive] = useState(false);
 
     
-
+    
     const useOutsideClick = (callback) => {
         const ref = useRef();
       
@@ -32,6 +32,7 @@ function Menu() {
 
       const handleClick = event => {
         setIsActive(!isActive);
+        //ref.current = !isActive;
         event.preventDefault();
     };
 
@@ -58,9 +59,15 @@ function Menu() {
             </div>
             
             <div className="menuContainer">
-                <div className="menu-item-wrapper">
-                {/* <Link to='/' style={{ textDecoration: 'none' }} className="menu-item">menu item 1</Link> */}
-                </div> 
+
+              <Link to='/Schedule' style={{ textDecoration: 'none' }} className="menu-item-wrapper" onClick={() =>{setIsActive(false)}}>
+                <p className="menu-item">Horário</p>
+              </Link>
+
+              <Link to='/Profile' style={{ textDecoration: 'none' }} className="menu-item-wrapper" onClick={() =>{setIsActive(false)}} >
+                <p className="menu-item">Perfil</p>
+              </Link>
+
             </div>
 
         </div>

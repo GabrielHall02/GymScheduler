@@ -94,6 +94,22 @@ input[type="number"] {
     font-family: 'Roboto Mono', sans-serif;
 }
 
+.schedule-title{
+    font-family:"Roboto Condensed";
+    font-weight:700;
+    font-size:20px;
+    margin-block-start:15px;
+}
+
+.schedule-description{
+    font-family:"Roboto Mono";
+    font-weight: 300;
+    font-size: 16px;
+    margin-block-start: 0;
+    letter-spacing: -1.3px;
+
+}
+
 @keyframes fade-in-move-up {
     0% {
       opacity: 0;
@@ -104,3 +120,27 @@ input[type="number"] {
       transform: translateY(0em);
     }
   }
+
+  @media screen and (max-width: 768px) {
+    .card-schedule{
+        height: fit-content;
+        width: 300px;
+        border-radius: 26px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .card-schedule .text-box{
+        width: fit-content;
+        padding-left: 10px;
+    }
+    .card-schedule .text-box .schedule-title{
+        font-size: 20px;
+    }
+    .card-schedule .text-box .schedule-description{
+        font-size: 16px;
+    }
+    .checkbox-container{
+        padding-right: 10px;
+    }
+}

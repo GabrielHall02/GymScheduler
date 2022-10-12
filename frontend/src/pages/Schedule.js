@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react"
 import ScheduleCard from "../components/scheduleCard/ScheduleCard"
 import Modal from "react-modal"
+import { Icon } from '@iconify/react';
+import "./style.css"
 
 function Schedule () {
 
@@ -42,24 +44,6 @@ function Schedule () {
 
 
     let subtitle
-    const customStyles = {
-        content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          transition: 'all 0.5s ease',
-          borderRadius: '22px',
-          width: '500px',
-          height: '400px'
-        },
-        ReactModal__Overlay: {
-            
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        }
-    };
     Modal.setAppElement('#root');
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -160,12 +144,12 @@ function Schedule () {
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
-                style={customStyles}
+                className="modal"
                 contentLabel="Modal"
             >
                 <div className="modal-header">
                     <h2 ref={_subtitle => (subtitle = _subtitle)} className="black" style={{fontWeight:"500"}}>Adicionar Horário</h2>
-                    <div className="btn-close" onClick={closeModal}></div>
+                    <div className="btn-close" onClick={closeModal}><Icon  icon="carbon:close-filled" color="black" /></div>
                 </div>
                 <form className="modal-body" onSubmit={newSchedule}>
                     <div className="flex-row" style={{height:"100%"}}>

@@ -107,9 +107,48 @@ export default class usersDAO {
     // Update a user
     static async updateUsers(userId, username, email, password, ts) {
         try {
-            const updateResponse = await users.updateOne({ _id: ObjectId(userId) }, { $set: { username: username, email: email, password: password, timestamp: ts } }, )
+            
+            // check which fields are being updated, each empty field can be null or "" or undefined
+            // If username != "" then update username field
+            if (username != "" && username != null && username != undefined) {
+                const updateResponse = await users.updateOne(
+                    { _id: ObjectId(userId) },
+                    { $set: { username: username,
+                         timestamp: ts
+                        } 
+                    }
+                )
+                return updateResponse
+            }
+            // If email != "" then update email field
+            if (email != "" && email != null && email != undefined) {
+               
+                const updateResponse = await users.updateOne(
+                    { _id: ObjectId(userId) },
+                    { $set: {
+                         email: email, 
+                         timestamp: ts 
+                        } 
+                    }
+                )
+                return updateResponse
+            }
+            // If password != "" then update password field
+            if (password != "" && password != null && password != undefined) {
+                
+                const pass = await bcrypt.hash(password, saltRounds)
+                const updateResponse = await users.updateOne(
+                    { _id: ObjectId(userId) },
+                    { $set: {
+                         password: pass, 
+                         timestamp: ts 
+                        } 
+                    }
+                )
+                return updateResponse
+            }
 
-            return updateResponse
+
         } catch (e) {
             console.error(`Unable to update user: ${e}`)
             return { error: e }

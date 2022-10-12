@@ -2,14 +2,18 @@ import React, {useEffect} from "react"
 import "./style.css"
 import ProfileCard from "../components/profileCard/ProfileCard"
 import Modal from "react-modal"
+import { Icon } from '@iconify/react';
 
 function Profile () {
 
-    const [loggedUser, setUser] = React.useState("");
+
     const [modalProps, setModalProps] = React.useState({});
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [userId, setUserId] = React.useState("");
+
+    const [value, setValue] = React.useState("");
 
     useEffect(() => {
         fetch("http://localhost:5005/api/v1/users/login", {
@@ -23,10 +27,10 @@ function Profile () {
         .then((data) => {
             try{
                 if (data.loggedIn === true) {
-                    setUser(data.user);
                     setUsername(data.user.username);
                     setEmail(data.user.email);
                     setPassword('********');
+                    setUserId(data.user._id);
 
                 } else {
                     window.location.href = "/Login"
@@ -59,26 +63,34 @@ function Profile () {
 
     }
 
+    async function changeUser (event, key, value) {
+        event.preventDefault();
+
+        key = key.toLowerCase();
+        console.log(key +":" + value);
+        // Send the request to the backend
+        const response = await fetch("http://localhost:5005/api/v1/users/", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                _id : userId,
+                [key] : value
+            })
+        })
+        
+        if (response.status === 200){
+            console.log("Success")
+            // Logout
+            logout();
+        }
+
+    }
+
 
     let subtitle
-    const customStyles = {
-        content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          transition: 'all 0.5s ease',
-          borderRadius: '22px',
-          width: '500px',
-          height: '400px'
-        },
-        ReactModal__Overlay: {
-            
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        }
-    };
 
     Modal.setAppElement('#root');
 
@@ -108,11 +120,12 @@ function Profile () {
                 <div className="btn-xs" onClick={logout}>Terminar Sessão</div>
             </div>
             <div className="schedule-table">
-                <div className="flex-row" style={{height: "100%"}}>
-                <ProfileCard _key={"Name"} value={username} onPress={() => {openModal(); setModalProps({"key":"Nome", "value":username})}}/>
-                <ProfileCard _key={"email"} value={email} onPress={() => {openModal(); setModalProps({"key":"Email", "value":email})}}/>
+                <div className="profile-flex" style={{height: "100%"}}>
+                <ProfileCard _key={"Username"} value={username} onPress={() => {openModal(); setModalProps({"key":"Username", "value":username})}}/>
+                <ProfileCard _key={"Email"} value={email} onPress={() => {openModal(); setModalProps({"key":"Email", "value":email})}}/>
                 </div>
-                <div className="flex-row">
+                
+                <div className="profile-flex" >
                 <ProfileCard _key={"Password"} value={password} onPress={() => {openModal(); setModalProps({"key":"Password", "value":password})}}/>
                 </div>
             </div>
@@ -120,14 +133,14 @@ function Profile () {
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
-                style={customStyles}
+                className="modal"
                 contentLabel="Modal"
             >
                 <div className="modal-header">
                     <h2 ref={_subtitle => (subtitle = _subtitle)} className="black" style={{fontWeight:"500"}}>Alterar {modalProps.key}</h2>
-                    <div className="btn-close" onClick={closeModal}></div>
+                    <div className="btn-close" onClick={closeModal}><Icon  icon="carbon:close-filled" color="black" /></div>
                 </div>
-                <form className="modal-body" >
+                <form className="modal-body" onSubmit={(e) => changeUser(e, modalProps.key,value)}>
                     <div className="flex-row" style={{height:"100%"}}>
                         <div className="flex-column">
                             <label className="black" style={{fontWeight:"500"}}>{modalProps.key}</label>
@@ -137,7 +150,7 @@ function Profile () {
                     <div className="flex-row" style={{height:"100%"}}>
                         <div className="flex-column">
                             <label className="black" style={{fontWeight:"500"}}>New {modalProps.key}</label>
-                            <input type="text" name="username" id="username" className="input" placeholder={modalProps.key} />
+                            <input type={modalProps.key === "Password" ? "password" : "text"} name="value" id="value" className="input" placeholder={modalProps.key} value={value} onChange={(e) => setValue(e.target.value)}/>
                         </div>
                     </div>
                     <div className="modal-bottom">

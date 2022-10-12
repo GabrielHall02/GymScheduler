@@ -105,7 +105,7 @@ export default class usersController {
 
     static async apiUpdateUsers(req, res, next) {
         try {
-            const userId = req.body.user_id;
+            const userId = req.body._id;
             const username = req.body.username;
             const email = req.body.email;
             const password = req.body.password;

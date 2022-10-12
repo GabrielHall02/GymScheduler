@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import "./style.css"
 
 const ScheduleCard = (props) => {
@@ -74,12 +74,12 @@ const ScheduleCard = (props) => {
     return(
         <div className="card-schedule" id={id}>
             <div className="text-box">
-                <p className="black" style={{fontFamily:"Roboto Condensed", fontWeight:"700", fontSize:"25px", marginBlockStart:"15px"}}>{date}</p>
-                <p className="black" style={{fontFamily:"Roboto Mono", fontWeight:"300", fontSize:"22px", marginBlockStart:"0", letterSpacing:"-1.3px"}}>{time}</p>
+                <p className="black schedule-title">{date}</p>
+                <p className="black schedule-description">{time}</p>
             </div>
             <div className="text-box">
-                <p className="black" style={{fontFamily:"Roboto Condensed", fontWeight:"700", fontSize:"25px", marginBlockStart:"15px"}}>USER</p>
-                <p className="black" style={{fontWeight:"300", fontSize:"22px", marginBlockStart:"0"}}>{user}</p>
+                <p className="black schedule-title">USER</p>
+                <p className="black schedule-description">{user}</p>
             </div>
             <form className="checkbox-container" onChange={removeSchedule}>
                 <input className="checkbox" type="checkbox" id="check" name="check" value={id}/>

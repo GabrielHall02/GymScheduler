@@ -38,8 +38,8 @@ function Home () {
         <>
         <div className="hero_section flex-col-center">
             <div className="hero-text">
-                <p style={{color:"#231f20", fontWeight:"800", fontSize:"2em"}}>GUY SAUCE<i className="yellow"> PERFORMANCE</i></p>
-                <p className="yellow" style={{fontWeight:"500", fontSize:"1.8em", marginBlockStart:"0"}}>PERSONAL TRAINING</p>
+                <p className="title">GUY SAUCE<i className="yellow"> PERFORMANCE</i></p>
+                <p className="yellow subtitle">PERSONAL TRAINING</p>
             </div>
             <form onSubmit={getStarted}>
                 <input type="submit" value={"COMEÇAR"}  className="btn-s"/>

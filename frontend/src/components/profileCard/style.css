@@ -1,0 +1,26 @@
+.card-profile{
+    animation: fade-in-move-up 0.7s;
+    width: 45%;
+    height: 110px;  
+    display: flex;
+    background-color: #fff;
+    border-radius: 22px;
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.27);
+    margin-bottom: 20px;
+    cursor: pointer;
+
+}
+
+.card-profile .text-box{
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.edit-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

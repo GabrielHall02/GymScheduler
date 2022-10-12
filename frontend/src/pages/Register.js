@@ -42,7 +42,7 @@ function Register () {
         <div className="container">
             <div className="top"></div>
             <div className="bottom"></div>
-            <div className="center" style={{top:"10%",marginTop:"0px"}}>
+            <div className="center">
                 <h2>Registar Conta</h2>
                 <form onSubmit={registerUser}>
                     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />

@@ -20,11 +20,11 @@ const Navbar = (props) => {
                         <p className="black">{props.user}</p>
                     </div>
                     :
-                    <div className="profile-wrapper flex-row mid">
+                    <Link to="/Profile" className="profile-wrapper flex-row mid" style={{textDecoration: 'none' }}>
                         {/* Need to check why Icon is changing size */}
                         <Icon icon="bi:person-circle" width="24" height="24" style={{paddingRight: '5%'}} className="black"/>
                         <p className="black">{props.user}</p>
-                    </div>
+                    </Link>
 
                 }
                 <Menu/>

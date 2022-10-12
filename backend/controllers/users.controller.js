@@ -151,5 +151,14 @@ export default class usersController {
         }
     }
 
+    static async apiLogout(req, res, next) {
+        try {
+            req.session.destroy();
+            res.json({ status: "success" });
+        } catch (e) {
+            res.status(500).json({ error: e.message });
+        }
+    }
+
 
 }

@@ -15,5 +15,8 @@ router
     .route("/login")
     .post(usersController.apiCheckUserLogin)
     .get(usersController.apiCheckIfLoggedIn)
+router
+    .route("/logout")
+    .get(usersController.apiLogout)
 
 export default router

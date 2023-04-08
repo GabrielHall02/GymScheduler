@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200;300;400;500&display=swap');
 
+
 body {
   font-size: 21px;
   color: rgba(250, 248, 244, 1);
@@ -135,7 +136,7 @@ h1{
     width: 130px;
     font-size: 18px;
     font-weight: 500;
-    border-radius: 25px;
+    border-radius: 20px;
   }
 }
 

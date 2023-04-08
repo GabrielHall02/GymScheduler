@@ -14,7 +14,7 @@ function Register () {
         console.log(email);
         console.log(password);
 
-        const response = await fetch(`http://localhost:5005/api/v1/pendingUsers/`, {
+        const response = await fetch(`https://guysauceperformance.herokuapp.com/api/v1/pendingUsers/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -28,7 +28,6 @@ function Register () {
         const data = await response.json();
 
         if (data.status === "success") {
-            //window.location.href = "/Login";
             alert("check mail")
         }else {
             console.log("Error");
@@ -52,7 +51,7 @@ function Register () {
                     <input type="submit" className="btn-m" value="Register" />
                 </form>
                 
-                <Link to="/Login" className="btn-m" style={{width:"100%", margin:"5px", backgroundImage: "linear-gradient(to right, #aaa 0%, #aaa 51%, #F8B716 100%)", textDecoration:"None"}}> Login </Link>
+                <Link to="/Login" className="help-text"> <p>Já tens conta? </p><p style={{color:"#446DD9",paddingLeft:"10px"}}>Iniciar agora → </p> </Link>
             </div>
         </div>
         </>

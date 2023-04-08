@@ -13,7 +13,7 @@ router
 
 router
     .route("/login")
-    .post(usersController.apiCheckUserLogin)
+    .post(usersController.apiLogin)
     .get(usersController.apiCheckIfLoggedIn)
 router
     .route("/logout")

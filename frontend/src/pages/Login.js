@@ -14,7 +14,7 @@ function Login () {
     async function login (event) {
         event.preventDefault();
 
-        const response = await fetch(`http://localhost:5005/api/v1/users/login/?email=${email}&password=${password}`, {
+        const response = await fetch(`https://guysauceperformance.herokuapp.com/api/v1/users/login/?email=${email}&password=${password}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -24,35 +24,15 @@ function Login () {
         const data = await response.json();
         console.log(data);
 
-        if (data.email === email) {
+        if (data.user) {
+            // Store token
+            localStorage.setItem("token", data.user);
             setLoginStatus("Success")
             window.location.href = "/Schedule";
         }else {
             setLoginStatus("Invalid email or password")
         }
     }
-
-    useEffect(()=>{
-        fetch("http://localhost:5005/api/v1/users/login", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            try{
-                if (data.loggedIn === true) {
-                    window.location.href = "/Schedule";
-                }
-            }catch{
-                console.log("Error");
-                setLoginStatus("Internal error")
-            }
-        }
-        )
-    },[])
     
     return (
         <>
@@ -67,8 +47,7 @@ function Login () {
                     <p className={loginStatus === "Success" ? "success-txt" : "error-txt"}>{loginStatus}</p>
                     <input type="submit" className="btn-m" value="Login" />
                 </form>
-                
-                <Link className="btn-m" style={{width:"100%", margin:"5px", backgroundImage: "linear-gradient(to right, #aaa 0%, #aaa 51%, #F8B716 100%)", textDecoration:"None"}} to="/Register"> Register </Link>
+            <Link to="/Register" className="help-text"> <p>Ainda não tens conta? </p><p style={{color:"#446DD9",paddingLeft:"10px"}}>Criar agora → </p> </Link>
             </div>
         </div>
         </>

@@ -4,11 +4,43 @@ import Modal from "react-modal"
 import { Icon } from '@iconify/react';
 import "./style.css"
 
+
 function Schedule () {
 
     const [date, setDate] = useState("");
     const [duration, setDuration] = useState("60");
     const [success, setSuccess] = useState("");
+    const [loggedUser, setUser] = React.useState("");
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            fetch ("https://guysauceperformance.herokuapp.com/api/v1/users/login", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                },
+                credentials: "include",
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                try{
+                    console.log(data)
+                    if (data.loggedIn === true) {
+                        setUser(data.user)
+                    }else{
+                        window.location.href = "/Login"
+                    }
+                }catch{
+                    console.log("Error");
+                }
+            })
+        }else{
+            window.location.href = "/Login"
+        }
+        
+    },[])
 
     async function newSchedule(event) {
         event.preventDefault();
@@ -21,7 +53,7 @@ function Schedule () {
         console.log (date, duration);
         // Create new date with date and time
         const newDate = new Date(date);
-        const response = await fetch("http://localhost:5005/api/v1/schedule", {
+        const response = await fetch("https://guysauceperformance.herokuapp.com/api/v1/schedule", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -69,7 +101,7 @@ function Schedule () {
     const [schedules, setSchedules] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:5005/api/v1/schedule", {
+        fetch("https://guysauceperformance.herokuapp.com/api/v1/schedule", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -89,30 +121,7 @@ function Schedule () {
         )
     }, [])
 
-    const [loggedUser, setUser] = React.useState("");
-
-    useEffect(() => {
-        fetch("http://localhost:5005/api/v1/users/login", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            try{
-                if (data.loggedIn === true) {
-                    setUser(data.user);
-                } else {
-                    window.location.href = "/Login"
-                }
-            }catch{
-                console.log("Error");
-            }
-        }
-        )
-    },[])
+    
 
     return (
         <div className="flex-row-center">

@@ -21,7 +21,7 @@ export default function sendConfirmationEmail(user, confirmationCode) {
                 <p>Hi ${user.username},</p>
                 <p>Thanks for signing up for our service. </p>
                 <p>To activate your account please confirm your email by clicking on the following link:</p>
-                <p><a target="_" href="http://localhost:3000/activate/:${confirmationCode}">CLICK HERE</a></p>
+                <p><a target="_" href="https://guysauceperformance.netlify.app/activate/:${confirmationCode}">CLICK HERE</a></p>
                 <p>Thanks!</p>
             `
         }

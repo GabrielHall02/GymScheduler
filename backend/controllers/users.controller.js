@@ -1,4 +1,5 @@
 import usersDAO from "../dao/usersDAO.js";
+import jwt from "jsonwebtoken";
 
 export default class usersController {
     static async apiGetUsers(req, res, next) {
@@ -55,17 +56,22 @@ export default class usersController {
 
     static async apiCheckIfLoggedIn(req, res, next){
         try {
-            if (req.session.user) {
-                res.json({ loggedIn: true, user: req.session.user })
-            }else{
-                res.json({ loggedIn: false })
-            }
+            const authHeader = req.headers['authorization']
+            const token = authHeader && authHeader.split(' ')[1]
+            if (token == null) return res.status(401).json({loggedIn: false})
+
+            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+                if (err) return res.status(403).json({loggedIn: false})
+                req.user = user
+                res.json({ loggedIn: true, user: req.user });
+            })
+
         } catch (e) {
             res.status(500).json({ error: e.message });
         }
     }
 
-    static async apiCheckUserLogin(req, res, next) {
+    static async apiLogin(req, res, next) {
         try {
             let email = req.query.email || {};
             let password = req.query.password || {};
@@ -76,8 +82,10 @@ export default class usersController {
                 return;
             }
 
-            req.session.user = result;
-            res.json(result);
+            const accessToken = jwt.sign(result, process.env.ACCESS_TOKEN_SECRET)
+
+            res.json({ user: accessToken });
+            
         } catch (e) {
             console.log(`api, ${e}`);
             res.status(500).json({ error: e });
@@ -153,8 +161,8 @@ export default class usersController {
 
     static async apiLogout(req, res, next) {
         try {
-            req.session.destroy();
-            res.json({ status: "success" });
+            // Delete jwt token from local storage
+
         } catch (e) {
             res.status(500).json({ error: e.message });
         }

@@ -21,24 +21,29 @@ function App() {
     const [user, setUser] = React.useState("");
 
     useEffect(() => {
-        fetch("http://localhost:5005/api/v1/users/login", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            try{
-                if (data.loggedIn === true) {
-                    setUser(data.user);
+        const token = localStorage.getItem("token");
+        if (token) {
+            fetch ("https://guysauceperformance.herokuapp.com/api/v1/users/login", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                },
+                credentials: "include",
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                try{
+                    console.log(data)
+                    if (data.loggedIn === true) {
+                        setUser(data.user)
+                    }
+                }catch{
+                    console.log("Error");
                 }
-            }catch{
-                console.log("Error");
-            }
+            })
         }
-        )
+        
     },[])
 
     

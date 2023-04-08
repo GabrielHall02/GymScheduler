@@ -7,24 +7,29 @@ const ScheduleCard = (props) => {
     const [loggedUser, setUser] = React.useState("");
 
     useEffect(() => {
-        fetch("http://localhost:5005/api/v1/users/login", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            try{
-                if (data.loggedIn === true) {
-                    setUser(data.user);
+        const token = localStorage.getItem("token");
+        if (token) {
+            fetch ("https://guysauceperformance.herokuapp.com/api/v1/users/login", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                },
+                credentials: "include",
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                try{
+                    console.log(data)
+                    if (data.loggedIn === true) {
+                        setUser(data.user)
+                    }
+                }catch{
+                    console.log("Error");
                 }
-            }catch{
-                console.log("Error");
-            }
+            })
         }
-        )
+        
     },[])
 
     async function removeSchedule () {
@@ -44,7 +49,7 @@ const ScheduleCard = (props) => {
 
         console.log(scheduleId)
 
-        const response = await fetch("http://localhost:5005/api/v1/schedule/?id=" + scheduleId, {
+        const response = await fetch("https://guysauceperformance.herokuapp.com/api/v1/schedule/?id=" + scheduleId, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -61,7 +66,7 @@ const ScheduleCard = (props) => {
         }
         else {
             checked[0].checked = false
-            alert("You can't delete this schedule - You might not be logged in or you aren't be the owner of this schedule")
+            alert("You can't delete this schedule - You might not be logged in or you might not be the owner of this schedule")
         }
 
     }
